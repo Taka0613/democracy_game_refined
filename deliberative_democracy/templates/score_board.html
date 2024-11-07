@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Public Scoreboard{% endblock %}
+{% block content %}
+<h2>Public Scoreboard</h2>
+<ul>
+    {% for metric in metrics %}
+    <li>{{ metric.type }}: {{ metric.value }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

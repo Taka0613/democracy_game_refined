@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Project Detail{% endblock %}
+{% block content %}
+<h2>{{ project.name }}</h2>
+<p><strong>Description:</strong> {{ project.description }}</p>
+<p><strong>Required Resources:</strong> {{ project.required_resources }}</p>
+<p><strong>Outcomes:</strong> {{ project.outcomes }}</p>
+
+<form method="POST">
+    <h3>Contribute Resources</h3>
+    {% for user in users %}
+    <div>
+        <h4>{{ user.character_name }}</h4>
+        <p><strong>Current Resources:</strong></p>
+        <ul>
+            <li>Time: {{ user.resources | selectattr('type', 'equalto', 'Time') | map(attribute='amount') | sum }}</li>
+            <li>Money: {{ user.resources | selectattr('type', 'equalto', 'Money') | map(attribute='amount') | sum }}
+            </li>
+            <li>Labor: {{ user.resources | selectattr('type', 'equalto', 'Labor') | map(attribute='amount') | sum }}
+            </li>
+        </ul>
+
+        <!-- Contribution Input Fields -->
+        <label for="contribute_time_{{ user.id }}">Contribute Time:</label>
+        <input type="number" name="contribute_time_{{ user.id }}" min="0" value="0"><br>
+
+        <label for="contribute_money_{{ user.id }}">Contribute Money:</label>
+        <input type="number" name="contribute_money_{{ user.id }}" min="0" value="0"><br>
+
+        <label for="contribute_labor_{{ user.id }}">Contribute Labor:</label>
+        <input type="number" name="contribute_labor_{{ user.id }}" min="0" value="0"><br>
+    </div>
+    {% endfor %}
+    <button type="submit">Submit Contribution</button>
+</form>
+{% endblock %}

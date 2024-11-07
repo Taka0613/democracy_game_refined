@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ user.character_name }}</h2>
+
+<div>
+    <h3>Character Information</h3>
+    <p><strong>Interests:</strong> {{ user.interests }}</p>
+    <p><strong>Utility Criteria:</strong> {{ user.utility_criteria }}</p>
+    <p><strong>Starting Resources:</strong> Time: {{ user.starting_resources.split(',')[0] }},
+        Money: {{ user.starting_resources.split(',')[1] }},
+        Labor: {{ user.starting_resources.split(',')[2] }}</p>
+    <p><strong>Reading:</strong> {{ user.reading }}</p>
+</div>
+
+<div>
+    <h3>Current Resources</h3>
+    <ul>
+        {% for resource in user.resources %}
+        <li><strong>{{ resource.type }}:</strong> {{ resource.amount }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
