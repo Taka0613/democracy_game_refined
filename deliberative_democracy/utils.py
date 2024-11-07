@@ -1,3 +1,6 @@
+from models import db, CommonMetric
+
+
 def parse_resources(resource_string):
     """
     Parse a resource string like 'Time: 2, Money: 1, Labor: 3'
